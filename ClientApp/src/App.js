@@ -4,7 +4,7 @@ export default function () {
 
     //for the data set
 
-    const [countries, setCountries] = useState([]);
+    const [employees, setEmployees] = useState([]);
 
     async function getEmployees() {
         return fetch("/employees").then(response => response.json());
