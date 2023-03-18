@@ -49,16 +49,13 @@ export default function () {
                 <tbody>
                     {employees.map((employee) => (
                         <tr key={employee.id}>
-                            
                             <td>{employee.name}</td>
                             <td>{employee.value}</td>
-                            
+
                         </tr>
                     ))}
                 </tbody>
             </table>
-
-            {JSON.stringify(employees, null, 2)}
         </div>
         
 
