@@ -3,8 +3,12 @@ import React, { useState, useEffect } from 'react';
 export default function () {
 
     //for the data set
-
     const [employees, setEmployees] = useState([]);
+
+
+    async function getEmployees() {
+        return fetch("/employees").then(response => response.json());
+    }
 
     useEffect(() => {
         async function fetchEmployees() {
@@ -14,10 +18,16 @@ export default function () {
         fetchEmployees();
     }, []);
 
-    async function getEmployees() {
-        return fetch("/employees").then(response => response.json());
-    }
 
+    const [name, setName] = useState('');
+    const [value, setValue] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        await createEmployee(name, value);
+        setName('');
+        setValue('');
+    };
 
     async function createEmployee(name, value) {
         return fetch("/employees", {
@@ -34,7 +44,8 @@ export default function () {
             body: JSON.stringify({ name: name, value: value })
         });
     }
-   
+
+
 
     return (
     
@@ -51,12 +62,28 @@ export default function () {
                         <tr key={employee.id}>
                             <td>{employee.name}</td>
                             <td>{employee.value}</td>
-
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+
+                    <label>
+                        Value:
+                        <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+                    </label>
+                    <button type="submit">Create Employee</button>
+                </label>
+
+            </form>
+            
         </div>
+        
+
         
 
     );
