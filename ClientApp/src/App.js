@@ -12,7 +12,7 @@ export default function () {
 
     useEffect(() => {
         async function fetchEmployees() {
-            const data = await getEmployees();
+            const data = await getEmployees(); // using that function
             setEmployees(data);
         }
         fetchEmployees();
@@ -22,6 +22,7 @@ export default function () {
     const [name, setName] = useState('');
     const [value, setValue] = useState('');
 
+    //click submit
     const handleSubmit = async (event) => {
         event.preventDefault();
         await createEmployee(name, value);
@@ -62,11 +63,14 @@ export default function () {
                         <tr key={employee.id}>
                             <td>{employee.name}</td>
                             <td>{employee.value}</td>
+                            <td><button>Update</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
+
+            Update employee, Need to hit refresh to see updated data
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
