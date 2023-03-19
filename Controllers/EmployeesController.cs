@@ -62,6 +62,7 @@ namespace InterviewTestBasic.Controllers
                 connection.Open();
 
                 var queryCmd = connection.CreateCommand();
+                // this one update employee by the name, instead of id
                 queryCmd.CommandText = @"UPDATE Employees SET Value=@v WHERE Name=@n";
                 queryCmd.Parameters.AddWithValue("@n", employee.Name);
                 queryCmd.Parameters.AddWithValue("@v", employee.Value);

@@ -19,15 +19,15 @@ export default function () {
     }, []);
 
 
-    const [name, setName] = useState('');
-    const [value, setValue] = useState('');
+    const [nameCreate, setNameCreate] = useState('');
+    const [valueCreate, setValueCreate] = useState('');
 
     //click submit
-    const handleSubmit = async (event) => {
+    const handleSubmitCreate = async (event) => {
         event.preventDefault();
-        await createEmployee(name, value);
-        setName('');
-        setValue('');
+        await createEmployee(nameCreate, valueCreate);
+        setNameCreate('');
+        setValueCreate('');
     };
 
     async function createEmployee(name, value) {
@@ -46,7 +46,17 @@ export default function () {
         });
     }
 
+    const [nameUpdate, setNameUpdate] = useState('');
+    const [valueUpdate, setValueUpdate] = useState('');
+   
 
+    //click submit
+    const handleSubmitUpdate = async (event) => {
+        event.preventDefault();
+        await updateEmployee(nameUpdate, valueUpdate);
+        setNameUpdate('');
+        setValueUpdate('');
+    };
 
     return (
     
@@ -63,28 +73,45 @@ export default function () {
                         <tr key={employee.id}>
                             <td>{employee.name}</td>
                             <td>{employee.value}</td>
-                            <td><button>Update</button></td>
+                            
                         </tr>
                     ))}
                 </tbody>
             </table>
 
 
-            Update employee, Need to hit refresh to see updated data
-            <form onSubmit={handleSubmit}>
+            Create employee, Need to hit refresh to see updated data
+            <form onSubmit={handleSubmitCreate}>
                 <label>
                     Name:
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" value={nameCreate} onChange={(e) => setNameCreate(e.target.value)} />
 
                     <label>
                         Value:
-                        <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+                        <input type="text" value={valueCreate} onChange={(e) => setValueCreate(e.target.value)} />
                     </label>
                     <button type="submit">Create Employee</button>
                 </label>
 
             </form>
-            
+
+            Update Employee, Make sure you put correct name so it doesn't crash
+            <form onSubmit={handleSubmitUpdate}>
+                <label>
+                    Name:
+                    <input type="text" value={nameUpdate} onChange={(e) => setNameUpdate(e.target.value)} />
+
+                    <label>
+                        Value:
+                        <input type="text" value={valueUpdate} onChange={(e) => setValueUpdate(e.target.value)} />
+                    </label>
+                    <button type="submit">Update Employee</button>
+                </label>
+
+            </form>
+
+
+
         </div>
         
 
